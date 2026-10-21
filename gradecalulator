@@ -1,0 +1,52 @@
+import json
+
+def lambda_handler(event, context):
+    mark = event.get("mark", "")
+    name = event.get("name", "")
+    subject = event.get ("subject", "")
+
+    passed = ""
+
+    
+
+    if mark < 0 or mark > 100:
+        return "Invalid Mark"
+
+    if mark >= 80 and mark <= 100:
+        grade = "A"
+        
+
+
+    elif mark >= 70 and mark < 79:
+        grade = "B"
+
+    elif mark >= 60 and mark < 69:
+        grade = "C"
+
+    elif mark >= 50 and mark < 59:
+        grade = "D"
+
+    else:
+        grade = "F"
+    
+    if mark < 50:
+        passed = "Fail"
+
+    else:
+        passed  = "Pass"
+
+    result = {
+        "Name": name,
+        "Grade": grade,
+        "Pass": passed,
+        "Mark": mark
+    }
+
+
+    return json.dumps(result)
+
+
+    return {
+        'statusCode': 200,
+        'body': json.dumps('Hello from Lambda!')
+    }
